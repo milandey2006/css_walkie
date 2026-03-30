@@ -46,7 +46,7 @@ export default function CartDrawer() {
       />
 
       {/* Slide-out Drawer Panel */}
-      <div className={`fixed right-0 top-0 h-full w-full sm:w-[500px] bg-white shadow-2xl z-[110] transform transition-transform duration-500 ease-out flex flex-col ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`fixed right-0 top-0 h-full w-[100vw] sm:w-[480px] md:w-[500px] bg-white shadow-2xl z-[110] transform transition-transform duration-500 ease-out flex flex-col ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-200">

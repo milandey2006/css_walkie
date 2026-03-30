@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRental } from "../context/RentalContext";
-import { X, CheckCircle, Loader2, Send, Phone, Mail, User, ShieldCheck } from "lucide-react";
+import { X, CheckCircle, Loader2, Send, Phone, Mail, User, ShieldCheck, Building2, MapPin, Navigation } from "lucide-react";
 import { format } from "date-fns";
 
 export default function CheckoutModal() {
@@ -20,12 +20,46 @@ export default function CheckoutModal() {
     name: "",
     email: "",
     phone: "",
+    company: "",
+    address: "",
+    location: "",
     notes: ""
   });
 
+  const [isLocating, setIsLocating] = useState(false);
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
 
   if (!isCheckoutModalOpen) return null;
+
+  const handleGetLocation = () => {
+    setIsLocating(true);
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            // Reverse geocoding using a free Nominatim API to get human-readable location
+            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=10`);
+            const data = await res.json();
+            const city = data.address?.city || data.address?.town || data.address?.county || "Current Location";
+            setFormData(prev => ({ ...prev, location: city }));
+          } catch (err) {
+            console.error("Geocoding failed", err);
+            setFormData(prev => ({ ...prev, location: `${position.coords.latitude}, ${position.coords.longitude}` }));
+          } finally {
+            setIsLocating(false);
+          }
+        },
+        (error) => {
+          console.error("Location error", error);
+          alert("Could not get location. Please allow location access or type it manually.");
+          setIsLocating(false);
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+      setIsLocating(false);
+    }
+  };
 
   const subtotal = cartItems.reduce((acc, item) => {
     const itemTotal = totalDays > 0 ? (item.price * totalDays) : item.price;
@@ -58,7 +92,7 @@ export default function CheckoutModal() {
           clearCart();
           setIsCheckoutModalOpen(false);
           setStatus("idle");
-          setFormData({ name: "", email: "", phone: "", notes: "" });
+          setFormData({ name: "", email: "", phone: "", company: "", address: "", location: "", notes: "" });
         }, 5000);
       } else {
         setStatus("error");
@@ -147,18 +181,75 @@ export default function CheckoutModal() {
                    </div>
                 </div>
 
-                {/* Email */}
+                {/* Email and Company */}
+                <div className="grid sm:grid-cols-2 gap-6">
+                   <div className="space-y-2">
+                     <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                       <Mail className="w-3 h-3" /> Email Address
+                     </label>
+                     <input 
+                       required
+                       type="email"
+                       placeholder="name@example.com"
+                       value={formData.email}
+                       onChange={(e) => setFormData({...formData, email: e.target.value})}
+                       className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-slate-800 shadow-sm"
+                     />
+                   </div>
+                   
+                   <div className="space-y-2">
+                     <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                       <Building2 className="w-3 h-3" /> Company Name
+                     </label>
+                     <input 
+                       required
+                       type="text"
+                       placeholder="Company or Event Name"
+                       value={formData.company}
+                       onChange={(e) => setFormData({...formData, company: e.target.value})}
+                       className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-slate-800 shadow-sm"
+                     />
+                   </div>
+                </div>
+
+                {/* Location Tool */}
                 <div className="space-y-2">
-                   <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
-                     <Mail className="w-3 h-3" /> Email Address
-                   </label>
+                   <div className="flex items-center justify-between">
+                     <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                       <Navigation className="w-3 h-3" /> Current Location / City
+                     </label>
+                     <button 
+                       type="button" 
+                       onClick={handleGetLocation}
+                       disabled={isLocating}
+                       className="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition-colors disabled:opacity-50"
+                     >
+                       <MapPin className="w-3 h-3" />
+                       {isLocating ? "Locating..." : "Auto-Detect Location"}
+                     </button>
+                   </div>
                    <input 
                      required
-                     type="email"
-                     placeholder="name@company.com"
-                     value={formData.email}
-                     onChange={(e) => setFormData({...formData, email: e.target.value})}
+                     type="text"
+                     placeholder="Mumbai, Bangalore, etc."
+                     value={formData.location}
+                     onChange={(e) => setFormData({...formData, location: e.target.value})}
                      className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-slate-800 shadow-sm"
+                   />
+                </div>
+
+                {/* Address */}
+                <div className="space-y-2">
+                   <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2">
+                     <MapPin className="w-3 h-3" /> Complete Delivery Address
+                   </label>
+                   <textarea 
+                     required
+                     rows="2"
+                     placeholder="Venue address, studio number, or site location..."
+                     value={formData.address}
+                     onChange={(e) => setFormData({...formData, address: e.target.value})}
+                     className="w-full bg-white border border-slate-200 px-4 py-3 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold text-slate-800 text-sm shadow-sm"
                    />
                 </div>
 

@@ -21,8 +21,16 @@ export async function POST(request) {
           <div style="margin: 20px 0; background: #f8fafc; padding: 15px; border-radius: 8px;">
             <h2 style="font-size: 14px; color: #64748b; text-transform: uppercase; margin-bottom: 10px;">Customer Details</h2>
             <p style="margin: 5px 0;"><strong>Name:</strong> ${customer.name}</p>
+            <p style="margin: 5px 0;"><strong>Company:</strong> ${customer.company || "N/A"}</p>
             <p style="margin: 5px 0;"><strong>Email:</strong> ${customer.email}</p>
             <p style="margin: 5px 0;"><strong>Phone:</strong> ${customer.phone}</p>
+          </div>
+
+          <div style="margin: 20px 0; background: #f8fafc; padding: 15px; border-radius: 8px;">
+            <h2 style="font-size: 14px; color: #64748b; text-transform: uppercase; margin-bottom: 10px;">Delivery Details</h2>
+            <p style="margin: 5px 0;"><strong>Location/City:</strong> ${customer.location}</p>
+            <p style="margin: 5px 0;"><strong>Full Address:</strong> ${customer.address}</p>
+            ${customer.notes ? `<p style="margin: 5px 0;"><strong>Notes:</strong> ${customer.notes}</p>` : ''}
           </div>
 
           <div style="margin: 20px 0;">

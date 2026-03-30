@@ -168,15 +168,16 @@ export default function ProductsClient({ products }) {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-screen-2xl mx-auto px-6 mt-12 grid grid-cols-1 xl:grid-cols-5 gap-12">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 mt-6 md:mt-12 flex flex-col xl:flex-row gap-8 xl:gap-12">
 
         {/* Sidebar Filters */}
-        <aside className="space-y-8 xl:col-span-1 border-r border-slate-200 pr-8">
-          <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-2 w-full">Filters</h2>
+        <aside className="w-full xl:w-64 shrink-0">
+          <h2 className="text-lg font-bold text-slate-900 uppercase tracking-wider border-b border-slate-300 pb-2 mb-6 w-full">Filters</h2>
 
-          {/* Category */}
-          <div className="space-y-3">
-            <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest">Category</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-1 gap-6 xl:gap-8 xl:border-r border-slate-200 xl:pr-8">
+            {/* Category */}
+            <div className="space-y-3">
+              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-widest">Category</h3>
             <div className="space-y-2">
               {categories.map((cat) => (
                 <label key={cat} className="flex items-center gap-3 cursor-pointer group">
@@ -238,15 +239,16 @@ export default function ProductsClient({ products }) {
             </div>
           )}
 
-          {(selectedCategory !== "All" || selectedRange !== "All" || selectedDurability !== "All") && (
-            <button onClick={resetFilters} className="w-full py-2 px-4 bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold rounded-full uppercase tracking-wider transition-colors shadow-sm">
-              Clear Filters
-            </button>
-          )}
+            {(selectedCategory !== "All" || selectedRange !== "All" || selectedDurability !== "All") && (
+              <button onClick={resetFilters} className="w-full py-2 px-4 bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold rounded-full uppercase tracking-wider transition-colors shadow-sm sm:col-span-3 xl:col-span-1 mt-2">
+                Clear Filters
+              </button>
+            )}
+          </div>
         </aside>
 
         {/* Product Grid */}
-        <main className="xl:col-span-4">
+        <main className="flex-1 w-full">
           <div className="mb-6">
             <span className="text-slate-500 text-sm font-bold">
               {filteredProducts.length}{" "}
