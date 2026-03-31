@@ -10,9 +10,9 @@ export async function POST(request) {
 
     // Send the email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Champion Rentals <onboarding@resend.dev>', 
+      from: 'Champion Rentals <walkietalkie@championsecuritysystem.com>', 
       // TO: Switch back to walkietalkie@championsecuritysystem.com after verifying domain
-      to: 'deymilan066@gmail.com',
+      to: 'walkietalkie@championsecuritysystem.com',
       subject: `New Rental Request: ${customer.name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; rounded: 12px;">

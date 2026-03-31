@@ -125,10 +125,11 @@ export default function ProductsClient({ products }) {
   const [selectedDurability, setSelectedDurability] = useState("All");
 
   // Build filter options dynamically from the products list
-  const categories = useMemo(
-    () => ["All", ...new Set(products.map((p) => p.category).filter(Boolean))],
-    [products]
-  );
+  const categories = useMemo(() => {
+    const fromData = new Set(products.map((p) => p.category).filter(Boolean));
+    fromData.add("Accessories"); // Ensure Accessories is always an option
+    return ["All", ...Array.from(fromData)];
+  }, [products]);
   const ranges = useMemo(
     () => ["All", ...new Set(products.map((p) => p.range).filter(Boolean))],
     [products]

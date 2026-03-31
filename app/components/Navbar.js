@@ -51,10 +51,10 @@ export default function Navbar() {
                   onChange={(e) => setLocation(e.target.value)}
                   className="bg-transparent text-sm font-semibold text-slate-800 outline-none cursor-pointer appearance-none"
                 >
-                  <option value="Bangalore">Bangalore</option>
-                  <option value="Delhi">Delhi</option>
                   <option value="Mumbai">Mumbai</option>
-                  <option value="New York">New York</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Bangalore">Bangalore</option>
+                  <option value="Kolkata">Kolkata</option>
                 </select>
               </div>
               
