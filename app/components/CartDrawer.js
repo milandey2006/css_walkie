@@ -2,8 +2,6 @@
 
 import { useRental } from "../context/RentalContext";
 import Image from "next/image";
-import { client } from "../../lib/sanity";
-import { useEffect, useState } from "react";
 
 
 export default function CartDrawer() {
@@ -11,36 +9,9 @@ export default function CartDrawer() {
     isCartOpen, setIsCartOpen, 
     isCheckoutModalOpen, setIsCheckoutModalOpen,
     cartItems, updateQuantity, setQuantity, removeFromCart, addToCart,
-    totalDays 
+    totalDays,
+    accessories
   } = useRental();
-
-  const [accessories, setAccessories] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (isCartOpen) {
-      const fetchAccessories = async () => {
-        setLoading(true);
-        try {
-          const data = await client.fetch(
-            `*[_type == "rentalProduct" && category == "Accessories" && inStock == true] {
-              _id,
-              name,
-              "id": slug.current,
-              "price": pricePerDay,
-              "imageUrl": image.asset->url
-            }`
-          );
-          setAccessories(data);
-        } catch (err) {
-          console.error("Failed to fetch accessories:", err);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchAccessories();
-    }
-  }, [isCartOpen]);
 
   // Calculate Subtotal
   const subtotal = cartItems.reduce((acc, item) => {
@@ -160,39 +131,33 @@ export default function CartDrawer() {
           )}
 
           {/* Upsell / Accessory Suggestions */}
-          {cartItems.length > 0 && (loading || availableAccessories.length > 0) && (
+          {cartItems.length > 0 && availableAccessories.length > 0 && (
             <div className="mt-8 pt-8 border-t border-slate-200">
               <div className="flex items-center gap-2 mb-4">
                  <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z" /></svg>
                  <h3 className="text-sm font-bold uppercase tracking-widest text-slate-800">Complete Your Loadout</h3>
               </div>
               
-              {loading ? (
-                <div className="flex items-center justify-center py-4">
-                   <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {availableAccessories.map(acc => (
-                    <div key={acc.id} className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
-                       <div className="flex items-center gap-3">
-                         <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-slate-200 overflow-hidden shrink-0">
-                           <Image src={acc.imageUrl || "/hero-walkie.png"} alt={acc.name} width={40} height={40} className="w-full h-full object-contain p-1" />
-                         </div>
-                         <div>
-                           <h4 className="font-bold text-slate-900 text-xs">{acc.name}</h4>
-                           <span className="text-blue-500 font-bold text-[10px] uppercase tracking-wider block">
-                             {totalDays > 0 ? `+ ₹${(acc.price * totalDays).toFixed(2)} Total` : `+ ₹${acc.price.toFixed(2)} / Day`}
-                           </span>
-                         </div>
+              <div className="space-y-3">
+                {availableAccessories.map(acc => (
+                  <div key={acc.id} className="bg-white border border-slate-200 rounded-xl p-3 flex items-center justify-between shadow-sm">
+                     <div className="flex items-center gap-3">
+                       <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center border border-slate-200 overflow-hidden shrink-0">
+                         <Image src={acc.imageUrl || "/hero-walkie.png"} alt={acc.name} width={40} height={40} className="w-full h-full object-contain p-1" />
                        </div>
-                       <button onClick={() => addToCart(acc)} className="text-xs font-bold uppercase hover:bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border border-slate-200 transition-colors">
-                         Add
-                       </button>
-                    </div>
-                  ))}
-                </div>
-              )}
+                       <div>
+                         <h4 className="font-bold text-slate-900 text-xs">{acc.name}</h4>
+                         <span className="text-blue-500 font-bold text-[10px] uppercase tracking-wider block">
+                           {totalDays > 0 ? `+ ₹${(acc.price * totalDays).toFixed(2)} Total` : `+ ₹${acc.price.toFixed(2)} / Day`}
+                         </span>
+                       </div>
+                     </div>
+                     <button onClick={() => addToCart(acc)} className="text-xs font-bold uppercase hover:bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border border-slate-200 transition-colors">
+                       Add
+                     </button>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>

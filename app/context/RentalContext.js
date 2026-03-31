@@ -5,7 +5,9 @@ import { differenceInDays } from "date-fns";
 
 const RentalContext = createContext();
 
-export function RentalProvider({ children }) {
+export function RentalProvider({ children, initialAccessories = [] }) {
+  const [accessories] = useState(initialAccessories);
+  const [location, setLocation] = useState("Mumbai");
   const [deliveryDate, setDeliveryDate] = useState(null);
   const [pickupDate, setPickupDate] = useState(null);
   const [cartItems, setCartItems] = useState([]);
@@ -72,7 +74,9 @@ export function RentalProvider({ children }) {
       totalDays,
       cartItems, addToCart, removeFromCart, updateQuantity, setQuantity, clearCart,
       isCartOpen, setIsCartOpen,
-      isCheckoutModalOpen, setIsCheckoutModalOpen
+      isCheckoutModalOpen, setIsCheckoutModalOpen,
+      accessories,
+      location, setLocation
     }}>
       {children}
     </RentalContext.Provider>

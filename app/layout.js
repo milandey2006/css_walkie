@@ -20,15 +20,37 @@ import Navbar from "./components/Navbar";
 import { RentalProvider } from "./context/RentalContext";
 import CartDrawer from "./components/CartDrawer";
 import CheckoutModal from "./components/CheckoutModal";
+import { client } from "../lib/sanity";
 
-export default function RootLayout({ children }) {
+async function getAccessories() {
+  try {
+    return await client.fetch(
+      `*[_type == "rentalProduct" && category == "Accessories" && inStock == true] {
+        _id,
+        name,
+        "id": slug.current,
+        "price": pricePerDay,
+        "imageUrl": image.asset->url
+      }`,
+      {},
+      { cache: 'no-store' }
+    );
+  } catch (err) {
+    console.error("Sanity layout fetch error:", err);
+    return [];
+  }
+}
+
+export default async function RootLayout({ children }) {
+  const accessories = await getAccessories();
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased bg-slate-50`}
     >
       <body className="min-h-full flex flex-col text-slate-800 bg-slate-50 overflow-x-hidden">
-        <RentalProvider>
+        <RentalProvider initialAccessories={accessories}>
           <Navbar />
           <CartDrawer />
           <CheckoutModal />
