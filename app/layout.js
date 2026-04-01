@@ -12,8 +12,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Walkie Talkie Rentals in Mumbai & Across India | Champion Rentals",
-  description: "Premium walkie-talkie and two-way radio rentals in Mumbai, Delhi, Bangalore and across India. Perfect for events, film shoots, construction, and security.",
+  title: "Premium Walkie Talkie & CCTV Rentals | Champion Rentals India",
+  description: "Elite two-way radio and high-end CCTV surveillance rentals across India. Reliable communication and security for events, film shoots, and construction projects.",
+  icons: {
+    icon: "/logo/logo.png",
+    shortcut: "/logo/logo.png",
+    apple: "/logo/logo.png",
+  }
 };
 
 import Navbar from "./components/Navbar";
@@ -24,19 +29,25 @@ import { client } from "../lib/sanity";
 
 async function getAccessories() {
   try {
-    return await client.fetch(
-      `*[_type == "rentalProduct" && category == "Accessories" && inStock == true] {
+    const query = `
+      *[
+        (
+          (_type == "rentalProduct" && category == "Accessories") ||
+          (_type == "cctvProduct" && category in ["NVR / Recording", "POE Switch", "Storage (HDD)", "Cables & Wiring", "Accessories"])
+        ) && inStock == true
+      ] {
         _id,
+        _type,
+        category,
         name,
         "id": slug.current,
         "price": pricePerDay,
         "imageUrl": image.asset->url
-      }`,
-      {},
-      { cache: 'no-store' }
-    );
+      }
+    `;
+    return await client.fetch(query, {}, { cache: 'no-store' });
   } catch (err) {
-    console.error("Sanity layout fetch error:", err);
+    console.error("Sanity upsell fetch error:", err);
     return [];
   }
 }

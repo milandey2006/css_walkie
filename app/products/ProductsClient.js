@@ -88,11 +88,26 @@ function ProductCard({ product, totalDays, onAddToCart }) {
         </div>
 
         {/* Specs */}
-        {(product.range || product.durability) && (
+        {(product.range || product.durability || product.resolution || product.channels || product.storageCapacity) && (
           <div className="space-y-2 text-xs font-bold uppercase tracking-wider text-slate-500 mb-6 bg-slate-50 p-4 rounded-xl">
             {product.range && (
               <div className="flex justify-between border-b border-slate-200 pb-2">
-                <span>Range</span> <span className="text-slate-800">{product.range}</span>
+                <span>Range / Cov.</span> <span className="text-slate-800">{product.range}</span>
+              </div>
+            )}
+            {product.resolution && (
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span>Res.</span> <span className="text-slate-800">{product.resolution}</span>
+              </div>
+            )}
+            {product.channels && (
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span>Channels / Ports</span> <span className="text-slate-800">{product.channels}</span>
+              </div>
+            )}
+            {product.storageCapacity && (
+              <div className="flex justify-between border-b border-slate-200 pb-2">
+                <span>Storage</span> <span className="text-slate-800">{product.storageCapacity}</span>
               </div>
             )}
             {product.durability && (

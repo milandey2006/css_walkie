@@ -19,10 +19,22 @@ export default function CartDrawer() {
     return acc + (itemTotal * item.quantity);
   }, 0);
 
-  // Filter out accessories that are already in the cart so we don't double pitch them
-  const availableAccessories = accessories.filter(
-    acc => !cartItems.some(item => item.id === acc.id)
-  );
+  // Contextual Upsell Logic
+  const hasRadios = cartItems.some(item => item._type === "rentalProduct");
+  const hasCameras = cartItems.some(item => item._type === "cctvProduct" && item.category === "CCTV Camera");
+
+  const availableAccessories = accessories.filter(acc => {
+    // Basic filter: Don't show if already in cart
+    if (cartItems.some(item => item.id === acc.id)) return false;
+
+    // Logic: If user has Radios, show Radio Accessories
+    if (hasRadios && acc._type === "rentalProduct" && acc.category === "Accessories") return true;
+
+    // Logic: If user has Cameras, show CCTV-related equipment (NVR, POE, HDD, Cables)
+    if (hasCameras && acc._type === "cctvProduct" && acc.category !== "CCTV Camera") return true;
+
+    return false;
+  });
 
   return (
     <>

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { format } from "date-fns";
 import DatePickerModal from "./DatePickerModal";
 import { useRental } from "../context/RentalContext";
@@ -65,14 +66,16 @@ export default function Navbar() {
           
           {/* Main Top Row */}
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
-              <div className="w-8 h-8 rounded bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center font-bold text-white shadow-sm group-hover:shadow-md transition-all">
-                CS
+            <Link href="/" className="flex items-center gap-3 shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
+              <div className="relative h-10 w-40 md:h-12 md:w-48">
+                <Image 
+                  src="/logo/logo.png" 
+                  alt="Champion Rentals" 
+                  fill
+                  priority
+                  className="object-contain object-left"
+                />
               </div>
-              <span className="text-lg md:text-xl font-bold tracking-tight uppercase tracking-widest text-slate-800">
-                Champion <span className="text-slate-500 font-medium hidden sm:inline">Rentals</span>
-              </span>
             </Link>
 
             {/* Desktop Center: Date Picker Pill */}

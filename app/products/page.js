@@ -3,8 +3,9 @@ import { client } from '../../lib/sanity'
 import ProductsClient from './ProductsClient'
 
 const RENTAL_PRODUCTS_QUERY = `
-  *[_type == "rentalProduct" && inStock == true] | order(order asc, _createdAt asc) {
+  *[(_type == "rentalProduct" || _type == "cctvProduct") && inStock == true] | order(order asc, _createdAt asc) {
     _id,
+    _type,
     name,
     "id": slug.current,
     description,
@@ -12,6 +13,9 @@ const RENTAL_PRODUCTS_QUERY = `
     category,
     range,
     durability,
+    resolution,
+    channels,
+    storageCapacity,
     badge,
     "imageUrl": image.asset->url
   }

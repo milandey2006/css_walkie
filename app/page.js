@@ -26,32 +26,32 @@ export default function Home() {
           <div className="space-y-8 z-10 lg:pl-12">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-widest shadow-sm">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-              Event & Tactical Equipment Rentals
+              Elite Comms & CCTV Surveillance
             </div>
             <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-slate-900">
-              Walkie Talkie <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">Rentals in India</span>
+              Premium Comms <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">& CCTV Rentals</span>
             </h1>
             <p className="text-lg lg:text-xl text-slate-600 max-w-xl leading-relaxed font-medium">
-              Equip your crew with the industry's most robust tactical two-way radios. Premium communication rentals delivered fast across <b>Mumbai</b>, Delhi, Bangalore and nationwide.
+              Equip your operation with the industry's most robust tactical radios and advanced CCTV surveillance systems. High-end rentals delivered to <b>Mumbai</b>, Delhi, and nationwide.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="/products" className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold uppercase tracking-wider transition-all shadow-[0_10px_20px_rgba(59,130,246,0.2)] hover:shadow-[0_15px_30px_rgba(59,130,246,0.3)] group flex items-center justify-center gap-3">
-                Check Availability <span className="group-hover:translate-x-1 transition-transform">→</span>
+                Build Your Package <span className="group-hover:translate-x-1 transition-transform">→</span>
               </Link>
               <button className="bg-white border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 px-8 py-4 rounded-xl font-bold transition-all shadow-sm">
-                View Fleet Specs
+                View Tech Specs
               </button>
             </div>
             <div className="pt-8 flex items-center gap-6 border-t border-slate-200 text-sm font-semibold text-slate-600 flex-wrap">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-blue-500" />
-                Trusted by 500+ Organizers
+                Trusted by 500+ Corporations
               </div>
               <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-slate-300"></div>
               <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-blue-500" />
-                Fast Delivery in Mumbai & Pan-India
+                <ShieldCheck className="w-5 h-5 text-blue-500" />
+                Secure & Enterprise Grade
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default function Home() {
             
             <Image 
               src="/hero-walkie.png"
-              alt="Professional Two Way Radio Walkie Talkie Rental in Mumbai"
+              alt="Professional Tactical Equipment Rental"
               width={700}
               height={700}
               className="relative w-full h-auto object-contain max-h-[600px] drop-shadow-2xl animate-[pulse_10s_ease-in-out_infinite]"
@@ -72,16 +72,16 @@ export default function Home() {
             
             {/* Floating Spec Badges */}
             <div className="absolute top-20 -left-6 bg-white/90 backdrop-blur-md border border-slate-200 p-4 rounded-xl shadow-xl hover:-translate-y-2 transition-transform">
-              <div className="text-blue-600 font-extrabold text-2xl leading-none">₹50<span className="text-sm text-slate-500">/day</span></div>
-              <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mt-1">Starting Rate</div>
+              <div className="text-blue-600 font-extrabold text-2xl leading-none">Pan-India</div>
+              <div className="text-slate-500 text-xs font-bold uppercase tracking-wider mt-1">Wide Deployment</div>
             </div>
             
             <div className="absolute bottom-24 -right-6 bg-slate-900/90 backdrop-blur-md border border-slate-700 p-4 rounded-xl shadow-2xl hover:-translate-y-2 transition-transform">
               <div className="text-white font-extrabold text-xl leading-none flex items-center gap-2">
                 <CheckCircle2 className="w-5 h-5 text-green-400" />
-                Ready to Deploy
+                In Stock & Ready
               </div>
-              <div className="text-slate-400 text-xs font-bold uppercase tracking-wider mt-1">Mumbai Fleet Fully Stocked</div>
+              <div className="text-slate-400 text-xs font-bold uppercase tracking-wider mt-1">CCTV & Comms Hub</div>
             </div>
           </div>
         </div>
@@ -91,8 +91,8 @@ export default function Home() {
       <section className="py-24 bg-slate-50">
         <div className="max-w-[1600px] mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">How Walkie Talkie Rentals Work</h2>
-            <p className="text-slate-600 text-lg font-medium">Rent premium communication gear in three simple steps. We handle the programming, charging, and logistics.</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">How Our Rentals Work</h2>
+            <p className="text-slate-600 text-lg font-medium">Rent premium communication and surveillance gear in three simple steps. We handle the programming, charging, and logistics.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
@@ -131,8 +131,8 @@ export default function Home() {
         <div className="max-w-[1600px] mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="max-w-3xl space-y-4">
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">Industries Trusting Our Walkie Talkies</h2>
-              <p className="text-slate-600 text-lg font-medium">Reliable communication is critical. We provide specialized two-way radio rentals across various sectors in India.</p>
+              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">Industries Trusting Our Solutions</h2>
+              <p className="text-slate-600 text-lg font-medium">Reliable communication and security are critical. We provide specialized radio and CCTV rentals across various sectors in India.</p>
             </div>
             <Link href="/products" className="text-blue-600 font-bold hover:text-blue-700 flex items-center gap-2 group whitespace-nowrap">
               View All Equipment <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -198,9 +198,9 @@ export default function Home() {
       <section className="py-24 bg-white border-t border-slate-200">
         <div className="max-w-[1600px] mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center mb-16">
-             <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-6">Your Ultimate Guide to Walkie Talkie Rentals in Mumbai & India</h2>
+             <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-6">Your Ultimate Guide to Walkie Talkie & CCTV Rentals in India</h2>
              <p className="text-xl text-slate-600 font-medium leading-relaxed">
-               As India's leading unified tactical comms provider, Champion Rentals powers the largest events, film shoots, and construction projects across the subcontinent with unmatched reliability and scale.
+               As India's leading unified tactical comms and security provider, Champion Rentals powers the largest events, film shoots, and construction projects with unmatched reliability and scale.
              </p>
           </div>
 
