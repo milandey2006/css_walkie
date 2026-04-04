@@ -303,7 +303,7 @@ export default function Home() {
                 <a href="tel:02245717953" className="hover:text-blue-600 transition-colors block">022-45717953</a>
               </li>
               <li className="flex items-start gap-3">
-                <a href="mailto:walkietalkie@championsecuritysystem.com" className="hover:text-blue-600 transition-colors block">walkietalkie@championsecuritysystem.com</a>
+                <a href="mailto:rental@championsecuritysystem.com" className="hover:text-blue-600 transition-colors block">rental@championsecuritysystem.com</a>
               </li>
               <li className="flex items-start gap-3">
                 <span className="block leading-relaxed">Office-21 A GR Floor, New Apollo Estate<br/>Old Nagardas Road Near SBI Bank<br/>Andheri East Mumbai 400069, MH, India</span>
