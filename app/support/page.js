@@ -40,7 +40,7 @@ export default function SupportPage() {
             </div>
             <h2 className="text-xl font-bold text-slate-900 mb-2">Email Us</h2>
             <p className="text-slate-500 font-medium mb-4">For bulk quotes, event planning, and general inquiries.</p>
-            <a href="mailto:walkietalkie@championsecuritysystem.com" className="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">rental@championsecuritysystem.com</a>
+            <a href="mailto:rental@championsecuritysystem.com" className="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors">rental@championsecuritysystem.com</a>
           </div>
 
         </div>
