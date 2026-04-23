@@ -77,7 +77,7 @@ export default function CheckoutModal() {
         body: JSON.stringify({
           customer: formData,
           cart: cartItems.map(i => ({ name: i.name, quantity: i.quantity, id: i.id })),
-          total: subtotal.toFixed(2),
+          total: Math.round(subtotal),
           dates: {
             start: deliveryDate ? format(deliveryDate, "yyyy-MM-dd") : "Not set",
             end: pickupDate ? format(pickupDate, "yyyy-MM-dd") : "Not set"
@@ -277,7 +277,7 @@ export default function CheckoutModal() {
                       </div>
                       <div className="text-right">
                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Grand Total:</span>
-                         <span className="text-2xl font-black text-slate-900">₹{subtotal.toFixed(2)}</span>
+                         <span className="text-2xl font-black text-slate-900">₹{Math.round(subtotal)}</span>
                       </div>
                    </div>
                 </div>

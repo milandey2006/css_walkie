@@ -53,16 +53,16 @@ function ProductCard({ product, totalDays, onAddToCart }) {
           {totalDays > 0 ? (
             <div className="flex flex-col">
               <div className="flex items-end">
-                <span className="text-3xl font-black text-slate-800 leading-none">₹{(product.price * totalDays).toFixed(2)}</span>
+                <span className="text-3xl font-black text-slate-800 leading-none">₹{Math.round(product.price * totalDays)}</span>
                 <span className="text-blue-500 font-bold ml-2 mb-1 text-xs uppercase tracking-widest">Total</span>
               </div>
               <span className="text-slate-500 font-medium text-xs mt-1 bg-slate-100 inline-block px-1.5 py-0.5 rounded">
-                {totalDays} <span className="text-slate-400">Days</span> @ ₹{product.price?.toFixed(2)}/day
+                {totalDays} <span className="text-slate-400">Days</span> @ ₹{Math.round(product.price)}/day
               </span>
             </div>
           ) : (
             <>
-              <span className="text-3xl font-black text-slate-800 leading-none">₹{product.price?.toFixed(2)}</span>
+              <span className="text-3xl font-black text-slate-800 leading-none">₹{Math.round(product.price)}</span>
               <span className="text-slate-500 font-bold ml-1 mb-1 text-sm leading-none">/ day</span>
             </>
           )}

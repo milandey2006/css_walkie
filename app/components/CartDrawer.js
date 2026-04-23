@@ -99,7 +99,7 @@ export default function CartDrawer() {
                      <div>
                         <h4 className="font-extrabold text-slate-900 text-sm leading-tight">{item.name}</h4>
                         <div className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">
-                          {totalDays > 0 ? `${totalDays} Days Locked` : `₹${item.price.toFixed(2)} / Day`}
+                          {totalDays > 0 ? `${totalDays} Days Locked` : `₹${Math.round(item.price)} / Day`}
                         </div>
                      </div>
                      <div className="flex items-end justify-between">
@@ -133,7 +133,7 @@ export default function CartDrawer() {
 
                         {/* Item Total Price */}
                         <span className="font-black text-blue-600 text-lg">
-                          ₹{(totalDays > 0 ? (item.price * totalDays * item.quantity) : (item.price * item.quantity)).toFixed(2)}
+                          ₹{Math.round(totalDays > 0 ? (item.price * totalDays * item.quantity) : (item.price * item.quantity))}
                         </span>
                      </div>
                   </div>
@@ -160,7 +160,7 @@ export default function CartDrawer() {
                        <div>
                          <h4 className="font-bold text-slate-900 text-xs">{acc.name}</h4>
                          <span className="text-blue-500 font-bold text-[10px] uppercase tracking-wider block">
-                           {totalDays > 0 ? `+ ₹${(acc.price * totalDays).toFixed(2)} Total` : `+ ₹${acc.price.toFixed(2)} / Day`}
+                            {totalDays > 0 ? `+ ₹${Math.round(acc.price * totalDays)} Total` : `+ ₹${Math.round(acc.price)} / Day`}
                          </span>
                        </div>
                      </div>
@@ -179,7 +179,7 @@ export default function CartDrawer() {
            <div className="flex justify-between items-center mb-4">
              <span className="text-slate-500 font-bold uppercase tracking-wider text-xs">Rental Subtotal</span>
              <div className="text-right">
-                <span className="block text-2xl font-black text-slate-900 leading-none">₹{subtotal.toFixed(2)}</span>
+                <span className="block text-2xl font-black text-slate-900 leading-none">₹{Math.round(subtotal)}</span>
                 {totalDays === 0 ? (
                   <span className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1 block">Date Selection Required!</span>
                 ) : (
